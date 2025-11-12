@@ -1,21 +1,77 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import api from '../utils/api';
 
 const HomePage = () => {
-    return ( 
-    <div className='home-container'>
-      <div className="home-content">
-        <h1 className="home-title">Hi, I'm Simon</h1>
-        <p className="home-subtitle">
-          Welcome to my blog! I write about technology, development, and other interesting topics.
-        </p>
-        <div className="home-links">
-          <a href="#" className="home-link blog-link">
-            View Blog Posts
-          </a>
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await api.get('/posts?status=published');
+      setPosts(response.data.posts);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="home-page">
+      <Navbar />
+      
+      <div className="posts-container">
+        <div className="posts-header">
+          <h1>Digital Ephemera</h1>
+          <p>Fleeting thoughts in the void</p>
         </div>
+
+        {loading ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <div className="posts-grid">
+            {posts.map(post => (
+              <article key={post._id} className="post-card">
+                <div className="post-meta">
+                  <span className="post-date">
+                    {new Date(post.createdAt).toLocaleDateString()}
+                  </span>
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="post-tags">
+                      {post.tags.map(tag => (
+                        <span key={tag} className="tag">#{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                
+                <h2 className="post-title">{post.title}</h2>
+                
+                {post.excerpt && (
+                  <p className="post-excerpt">{post.excerpt}</p>
+                )}
+                
+                <div className="post-content">
+                  {post.content}
+                </div>
+              </article>
+            ))}
+            
+            {posts.length === 0 && (
+              <div className="no-posts">
+                <p>The void is empty... for now.</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
-     );
-}
- 
+  );
+};
+
 export default HomePage;
