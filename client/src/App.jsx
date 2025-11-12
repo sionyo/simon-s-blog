@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import HomePage from "./pages/HomePage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path = '/admin' element = {<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             <Route path = '/' element={<HomePage />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </div>
       </Router>
