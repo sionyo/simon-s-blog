@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const Admin = require('../models/Admin');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import Admin from '../models/Admin.js';
 
 //initalize admin from env variables
 const initializeAdmin = async () => {
@@ -88,8 +88,4 @@ const getCurrentAdmin = async (req, res) => {
     }
 }
 
-module.exports = {
-    initializeAdmin,
-    loginAdmin,
-    getCurrentAdmin
-}
+export default { initializeAdmin, loginAdmin, getCurrentAdmin };
