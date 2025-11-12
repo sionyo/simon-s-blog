@@ -4,9 +4,12 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import connectDB from './config/database.js';
 import authRoutes from './routes/auth.js';
+import authController from './controllers/authController.js';
 
 const app = express();
 connectDB();
+
+authController.initializeAdmin();
 
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
