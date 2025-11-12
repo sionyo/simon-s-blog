@@ -1,5 +1,5 @@
 // Simple - just load .env, Render will override with production vars
-require('dotenv').config();
+import 'dotenv/config';
 
 const express = require('express')
 const mongoose = require('mongoose')
