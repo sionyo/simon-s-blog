@@ -13,7 +13,7 @@ authController.initializeAdmin();
 
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://theblogofsirsimon.vercel.app'] 
+    ? ['https://simonsblog-six.vercel.app/'] 
     : ['http://localhost:5173', 'http://127.0.0.1:5173'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
