@@ -12,7 +12,7 @@ const HomePage = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await api.get('/posts?status=published');
+      const response = await api.get('/posts');
       setPosts(response.data.posts);
     } catch (error) {
       console.error('Error fetching posts:', error);
