@@ -106,6 +106,12 @@ const AdminDashboard = () => {
             >
               Create Post
             </button>
+            <button 
+              onClick={handleLogout}
+              className="btn-delete"
+            >
+              Logout
+            </button>
           </div>
         </div>
 
